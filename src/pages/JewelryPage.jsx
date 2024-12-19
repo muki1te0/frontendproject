@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import NavBar from '../components/NavBar';
 import { Link } from 'react-router-dom';
 
-const JeweleryPage = () => {
+const JewelryPage = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
@@ -45,4 +45,4 @@ const JeweleryPage = () => {
   );
 };
 
-export default JeweleryPage;
+export default JewelryPage;
