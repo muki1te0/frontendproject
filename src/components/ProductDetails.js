@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, removeFromCart } from '../redux/slices/cartSlice';
-import { addToWishlist, removeFromWishlist } from '../redux/slices/wishlistSlice';
+import {
+  addToWishlist,
+  removeFromWishlist,
+  addToCart,
+  removeFromCart,
+} from '../redux/slices/userSlice';
 import NavBar from './NavBar';
+import AuthModal from './AuthModal';
 
 const ProductDetails = () => {
-  const { id } = useParams(); // Get product ID from URL
+  const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart.items);
-  const wishlist = useSelector((state) => state.wishlist.items);
+  const { userInfo, isAuthenticated } = useSelector((state) => state.user);
 
-  // Fetch product details
   useEffect(() => {
     fetch(`https://fakestoreapi.com/products/${id}`)
       .then((res) => res.json())
@@ -23,11 +27,16 @@ const ProductDetails = () => {
 
   if (!product) return <div>Loading...</div>;
 
-  // Check if the product is in cart or wishlist
-  const isInCart = cart.some((item) => item.id === product.id);
-  const isInWishlist = wishlist.some((item) => item.id === product.id);
+  const isInCart =
+  Array.isArray(userInfo.cart) &&
+  userInfo.cart.some((item) => item.id === product.id);
+  const isInWishlist = userInfo.wishlist.some((item) => item.id === product.id);
 
   const handleCartToggle = () => {
+    if (!isAuthenticated) {
+      setIsAuthModalOpen(true);
+      return;
+    }
     if (isInCart) {
       dispatch(removeFromCart(product.id));
     } else {
@@ -36,10 +45,19 @@ const ProductDetails = () => {
   };
 
   const handleWishlistToggle = () => {
+    if (!isAuthenticated) {
+      setIsAuthModalOpen(true);
+      return;
+    }
     if (isInWishlist) {
       dispatch(removeFromWishlist(product.id));
     } else {
-      dispatch(addToWishlist(product));
+      dispatch(addToWishlist({
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        image: product.image,
+      }));
     }
   };
 
@@ -48,7 +66,6 @@ const ProductDetails = () => {
       <NavBar />
       <div className="p-6 max-w-4xl mx-auto">
         <div className="flex gap-4">
-          {/* Product Image */}
           <img
             src={product.image}
             alt={product.title}
@@ -59,7 +76,6 @@ const ProductDetails = () => {
             <p className="text-gray-600">{product.description}</p>
             <p className="text-lg font-semibold text-gray-900">${product.price}</p>
             <div className="flex gap-4">
-              {/* Cart Button */}
               <button
                 className={`py-2 px-4 rounded ${
                   isInCart
@@ -70,8 +86,6 @@ const ProductDetails = () => {
               >
                 {isInCart ? 'Remove from Cart' : 'Add to Cart'}
               </button>
-
-              {/* Wishlist Button */}
               <button
                 className={`py-2 px-4 rounded ${
                   isInWishlist
@@ -86,6 +100,18 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        onLogin={() => {
+          setIsAuthModalOpen(false);
+          window.location.href = '/auth';
+        }}
+        onSignup={() => {
+          setIsAuthModalOpen(false);
+          window.location.href = '/auth';
+        }}
+      />
     </>
   );
 };

@@ -69,35 +69,46 @@ const NavBar = ({ onSearch }) => {
             </button>
           </>
         ) : (
-          <div className="relative">
-            <div
-              className="flex items-center gap-2 cursor-pointer"
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            >
-              <img
-                src={user?.profilePicture || "/default-profile.png"}
-                alt="Profile"
-                className="w-8 h-8 rounded-full"
-              />
-              <span>{user?.username}</span>
-            </div>
-            {isDropdownOpen && (
-              <div className="absolute top-12 right-0 bg-white text-black rounded-md shadow-lg">
-                <button
-                  onClick={() => navigate("/account")}
-                  className="block px-4 py-2 hover:bg-gray-200 w-full text-left"
-                >
-                  Account
-                </button>
-                <button
-                  onClick={handleLogout}
-                  className="block px-4 py-2 hover:bg-gray-200 w-full text-left"
-                >
-                  Logout
-                </button>
+          <>
+            {/* Wishlist and Cart Buttons */}
+            <Link to="/wishlist" className="hover:text-gray-400">
+              Wishlist
+            </Link>
+            <Link to="/cart" className="hover:text-gray-400">
+              Cart
+            </Link>
+
+            {/* Dropdown */}
+            <div className="relative">
+              <div
+                className="flex items-center gap-2 cursor-pointer"
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              >
+                <img
+                  src={user?.profilePicture || "/default-profile.png"}
+                  alt="Profile"
+                  className="w-8 h-8 rounded-full"
+                />
+                <span>{user?.username}</span>
               </div>
-            )}
-          </div>
+              {isDropdownOpen && (
+                <div className="absolute top-12 right-0 bg-white text-black rounded-md shadow-lg">
+                  <button
+                    onClick={() => navigate("/account")}
+                    className="block px-4 py-2 hover:bg-gray-200 w-full text-left"
+                  >
+                    Account
+                  </button>
+                  <button
+                    onClick={handleLogout}
+                    className="block px-4 py-2 hover:bg-gray-200 w-full text-left"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
+          </>
         )}
       </div>
     </header>

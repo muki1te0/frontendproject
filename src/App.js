@@ -9,7 +9,9 @@ import ProductDetails from "./components/ProductDetails";
 import WishlistPage from "./pages/WishlistPage";
 import CartPage from "./pages/CartPage";
 import SignLog from "./components/SignLog";
+import AccountPage from "./pages/AccountPage";
 import { loadUserFromStorage } from "./redux/slices/userSlice";
+import Footer from "./components/Footer";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -20,16 +22,21 @@ const App = () => {
 
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/men" element={<MenPage />} />
-        <Route path="/women" element={<WomenPage />} />
-        <Route path="/jewelry" element={<JewelryPage />} />
-        <Route path="/product/:id" element={<ProductDetails />} />
-        <Route path="/wishlist" element={<WishlistPage />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/auth" element={<SignLog />} />
-      </Routes>
+      <div className="flex flex-col min-h-screen">
+        <div className="flex-grow">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/men" element={<MenPage />} />
+            <Route path="/women" element={<WomenPage />} />
+            <Route path="/jewelry" element={<JewelryPage />} />
+            <Route path="/product/:id" element={<ProductDetails />} />
+            <Route path="/wishlist" element={<WishlistPage />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/auth" element={<SignLog />} />
+          </Routes>
+        </div>
+        <Footer /> {/* Добавляем футер */}
+      </div>
     </Router>
   );
 };

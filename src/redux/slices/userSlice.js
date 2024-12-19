@@ -1,28 +1,97 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+  userInfo: {
+    username: "",
+    profilePicture: "/default-profile.png",
+    firstName: "",
+    lastName: "",
+    country: "",
+    city: "",
+    mobileNumber: "",
+    birthdate: "",
+    wishlist: [],
+    cart: [],
+  },
+  isAuthenticated: false,
+};
+
 const userSlice = createSlice({
   name: "user",
-  initialState: { user: null, isAuthenticated: false },
+  initialState,
   reducers: {
-    login: (state, action) => {
-      state.user = action.payload;
-      state.isAuthenticated = true;
-      localStorage.setItem("user", JSON.stringify(action.payload));
+    updateUserInfo(state, action) {
+      state.userInfo = { ...state.userInfo, ...action.payload };
+      localStorage.setItem("user", JSON.stringify(state.userInfo));
     },
-    logout: (state) => {
-      state.user = null;
+    updateProfilePicture(state, action) {
+      state.userInfo.profilePicture = action.payload;
+      localStorage.setItem("user", JSON.stringify(state.userInfo));
+    },
+    login(state, action) {
+      state.userInfo = {
+        ...action.payload,
+        cart: action.payload.cart || [],
+        wishlist: action.payload.wishlist || [],
+      };
+      state.isAuthenticated = true;
+      localStorage.setItem("user", JSON.stringify(state.userInfo));
+    },
+    logout(state) {
+      state.userInfo = initialState.userInfo;
       state.isAuthenticated = false;
       localStorage.removeItem("user");
     },
-    loadUserFromStorage: (state) => {
+    loadUserFromStorage(state) {
       const storedUser = JSON.parse(localStorage.getItem("user"));
       if (storedUser) {
-        state.user = storedUser;
+        state.userInfo = {
+          ...storedUser,
+          cart: storedUser.cart || [],
+          wishlist: storedUser.wishlist || [],
+        };
         state.isAuthenticated = true;
       }
+    },
+    addToCart(state, action) {
+      state.userInfo.cart = state.userInfo.cart || [];
+      if (!state.userInfo.cart.some((item) => item.id === action.payload.id)) {
+        state.userInfo.cart.push(action.payload);
+        localStorage.setItem("user", JSON.stringify(state.userInfo));
+      }
+    },
+    removeFromCart(state, action) {
+      state.userInfo.cart = state.userInfo.cart.filter(
+        (item) => item.id !== action.payload
+      );
+      localStorage.setItem("user", JSON.stringify(state.userInfo));
+    },
+    addToWishlist(state, action) {
+      const newItem = action.payload;
+      if (!state.userInfo.wishlist.some((item) => item.id === newItem.id)) {
+        state.userInfo.wishlist.push(newItem);
+        localStorage.setItem("user", JSON.stringify(state.userInfo));
+      }
+    },
+    removeFromWishlist(state, action) {
+      state.userInfo.wishlist = state.userInfo.wishlist.filter(
+        (item) => item.id !== action.payload
+      );
+      localStorage.setItem("user", JSON.stringify(state.userInfo));
     },
   },
 });
 
-export const { login, logout, loadUserFromStorage } = userSlice.actions;
+export const {
+  updateUserInfo,
+  updateProfilePicture,
+  login,
+  logout,
+  loadUserFromStorage,
+  addToCart,
+  removeFromCart,
+  addToWishlist,
+  removeFromWishlist,
+} = userSlice.actions;
+
 export default userSlice.reducer;
