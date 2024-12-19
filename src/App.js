@@ -33,9 +33,10 @@ const App = () => {
             <Route path="/wishlist" element={<WishlistPage />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/auth" element={<SignLog />} />
+            <Route path="/account" element={<AccountPage />} />
           </Routes>
         </div>
-        <Footer /> {/* Добавляем футер */}
+        <Footer />
       </div>
     </Router>
   );
