@@ -32,6 +32,8 @@ const App = () => {
             <Route path="/auth" element={<SignLog />} />
             <Route path="/account" element={<AccountPage />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/product/:id" element={<ProductDetails />} />
+            <Route path="/admin" element={<AdminPage />} />
           </Routes>
         </div>
         <Footer /> {/* Добавляем футер */}
