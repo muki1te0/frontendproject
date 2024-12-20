@@ -96,9 +96,9 @@ const NavBar = ({ onSearch, onFilter }) => {
           {isFilterDropdownOpen && (
             <div className="absolute top-full mt-2 bg-white text-black rounded shadow-md p-4 w-64 z-50" 
             style={{
-              right: 0, // Align dropdown to the right edge of the button
-              maxWidth: '90vw', // Ensure it doesn't overflow
-              overflowX: 'hidden', // Prevent horizontal scrolling
+              right: 0,
+              maxWidth: '90vw', 
+              overflowX: 'hidden', 
               boxSizing: 'border-box',
             }}
             >
@@ -140,9 +140,18 @@ const NavBar = ({ onSearch, onFilter }) => {
               </div>
               <button
                 onClick={handleFilterApply}
-                className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg"
+                className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg mb-5"
               >
                 Apply Filters
+              </button>
+              <button
+                onClick={() => {
+                  setCategory("all");
+                  setPriceRange([0, 1000]);
+                }}
+                className="w-full bg-gray-300 text-black px-4 py-2 rounded-lg"
+              >
+                Reset Filters
               </button>
             </div>
           )}
