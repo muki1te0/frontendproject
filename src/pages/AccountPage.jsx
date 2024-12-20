@@ -92,7 +92,7 @@ const AccountPage = () => {
   
   return (
     <div className="bg-gray-100 min-h-screen">
-      <NavBar />
+      <NavBar onSearch={null}/>
       <div className="flex">
         {/* Sidebar */}
         <aside className="w-1/4 bg-lime-100 p-6 min-h-screen overflow-hidden">

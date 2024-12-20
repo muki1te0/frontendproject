@@ -1,46 +1,66 @@
-import React, { useEffect, useState } from 'react';
-import NavBar from '../components/NavBar';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import NavBar from "../components/NavBar";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-  
+  const [filters, setFilters] = useState({
+    category: "all",
+    priceRange: [0, 1000],
+  });
+
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
       .then((res) => res.json())
       .then((data) => {
-        // Exclude electronics
         const filteredData = data.filter(
-          (product) => product.category !== 'electronics'
+          (product) => product.category !== "electronics"
         );
         setProducts(filteredData);
-        setFilteredProducts(filteredData); // Initialize filtered products
+        setFilteredProducts(filteredData);
       })
-      .catch((err) => console.error('Error fetching products:', err));
+      .catch((err) => console.error("Error fetching products:", err));
   }, []);
 
   const handleSearch = (query) => {
+    applyFilters(query, filters);
+  };
+
+  const handleFilter = (newFilters) => {
+    setFilters(newFilters);
+    applyFilters("", newFilters);
+  };
+
+  const applyFilters = (query, currentFilters) => {
     const lowerCaseQuery = query.toLowerCase();
-    const filtered = products.filter(
-      (product) =>
+
+    const filtered = products.filter((product) => {
+      const matchesQuery =
         product.title.toLowerCase().includes(lowerCaseQuery) ||
-        product.description.toLowerCase().includes(lowerCaseQuery)
-    );
+        product.description.toLowerCase().includes(lowerCaseQuery);
+
+      const matchesCategory =
+        currentFilters.category === "all" ||
+        product.category === currentFilters.category;
+
+      const matchesPrice =
+        product.price >= currentFilters.priceRange[0] &&
+        product.price <= currentFilters.priceRange[1];
+
+      return matchesQuery && matchesCategory && matchesPrice;
+    });
+
     setFilteredProducts(filtered);
   };
 
   return (
     <>
-      <NavBar 
-      onSearch={handleSearch}
-      // user={user}
-      // onLogout={handleLogout}
-      />
+      <NavBar onSearch={handleSearch} onFilter={handleFilter} />
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
         {filteredProducts.map((product) => (
           <Link to={`/product/${product.id}`} key={product.id}>
-            <div key={product.id} className="border p-4 rounded shadow card">
+            <div className="border p-4 rounded shadow card">
               <img
                 src={product.image}
                 alt={product.title}

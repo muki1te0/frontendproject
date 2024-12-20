@@ -63,7 +63,7 @@ const ProductDetails = () => {
 
   return (
     <>
-      <NavBar />
+      <NavBar onSearch={null}/>
       <div className="p-6 max-w-4xl mx-auto">
         <div className="flex gap-4">
           <img
