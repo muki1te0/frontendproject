@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   addToWishlist,
   removeFromWishlist,
-  addToCart,
   removeFromCart,
 } from '../redux/slices/userSlice';
+import { addToCart } from '../redux/slices/cartSlice';
 import NavBar from './NavBar';
 import AuthModal from './AuthModal';
 
