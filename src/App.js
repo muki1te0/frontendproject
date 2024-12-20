@@ -30,6 +30,8 @@ const App = () => {
             <Route path="/wishlist" element={<WishlistPage />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/auth" element={<SignLog />} />
+            <Route path="/account" element={<AccountPage />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           </Routes>
         </div>
         <Footer /> {/* Добавляем футер */}
