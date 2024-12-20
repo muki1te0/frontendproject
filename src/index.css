@@ -1,14 +1,14 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -51,4 +51,74 @@ code {
   font-size: 14px;
   color: #555;
   margin-top: auto; /* Pushes price to the bottom */
+}
+.burger {
+  display: none;
+}
+.filterDropDown {
+  right: 31px !important; 
+  z-index: 50;
+}
+@media (max-width: 468px) {
+  .nav {
+    display: none;
+  }
+  .authDiv {
+    display: none;
+  }
+  .burger {
+    display: block;
+    margin-right: 0px;
+  }
+  .filterDropDown {
+    right: 0px !important;
+    z-index: 50;
+  }
+  .filterDiv{
+    font-size: 10px;
+    padding: 2px;
+    left: 50px;
+  }
+  .searchBox{
+    position: absolute;
+    width: 30vw;
+    left: 70px;
+  }
+  .card{
+    height: 420px;
+    padding: 10px;
+  }
+  .finalFooterBar{
+
+    display: flex;
+    flex-direction: column;
+  }
+  .accoutDiv{
+    flex-direction: column;
+  }
+  .sideBarDiv{
+    width: 100%;
+    height: 0%;
+    padding-bottom: 0px;
+  }
+}
+
+@media(max-width: 768px){
+  .chooseDiv{
+    width:80vw;
+    margin: 0 auto;
+    font-size: 2.5vw;
+  }
+  .totalPriceDiv{
+    width: 80vw;
+    margin: 0 auto;
+  }
+  .sideBarDiv{
+    width: 80%;
+    margin: 20px auto;
+  }
+  .personalDiv{
+    margin: 0 auto;
+    width: 95%;
+  }
 }

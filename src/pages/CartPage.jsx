@@ -151,7 +151,7 @@ const CartPage = () => {
           </div>
         </div>
         <div className="flex flex-col lg:flex-row gap-6">
-          <div className="flex-1">
+          <div className="chooseDiv flex-1">
             {cartItems.map((item) => (
               <div
                 key={item.id}
@@ -234,7 +234,7 @@ const CartPage = () => {
               </div>
             ))}
           </div>
-          <div className="w-full lg:w-1/3 bg-gray-100 p-6 rounded-lg">
+          <div className="totalPriceDiv w-full lg:w-1/3 bg-gray-100 p-6 rounded-lg">
             <h2 className="text-xl font-bold mb-4">Total Price</h2>
             <div className="flex justify-between mb-4">
               <span>Goods:</span>

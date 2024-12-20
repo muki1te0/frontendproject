@@ -16,9 +16,7 @@ const Footer = () => {
           <div>
             <h3 className="text-white text-lg mb-4">About</h3>
             <ul className="space-y-2">
-              {[
-                { name: "Company", link: "/company" }, 
-              ].map((item, idx) => (
+              {[{ name: "Company", link: "/company" }].map((item, idx) => (
                 <li key={idx}>
                   <Link to={item.link} className="hover:text-white">
                     {item.name}
@@ -74,8 +72,7 @@ const Footer = () => {
             },
             {
               href: "https://www.instagram.com/nnnn__nn228/",
-              icon:
-                "https://img.icons8.com/color/48/000000/instagram-new.png",
+              icon: "https://img.icons8.com/color/48/000000/instagram-new.png",
             },
           ].map((link, idx) => (
             <a
@@ -101,10 +98,7 @@ const Footer = () => {
             </Link>
             <p>
               By signing up, you agree to our{" "}
-              <Link
-                to="/privacy-policy"
-                className=""
-              >
+              <Link to="/privacy-policy" className="hover:text-white">
                 privacy
               </Link>
             </p>
@@ -114,6 +108,5 @@ const Footer = () => {
     </footer>
   );
 };
-
 
 export default Footer;

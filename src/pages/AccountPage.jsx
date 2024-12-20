@@ -93,9 +93,9 @@ const AccountPage = () => {
   return (
     <div className="bg-gray-100 min-h-screen">
       <NavBar onSearch={null}/>
-      <div className="flex">
+      <div className="accoutDiv flex">
         {/* Sidebar */}
-        <aside className="w-1/4 bg-lime-100 p-6 min-h-screen overflow-hidden">
+        <aside className="w-1/4 sideBarDiv bg-lime-100 rounded-3xl ml-4 mt-10 p-6 overflow-hidden">
           <div className="text-center">
             <img
               src={profilePicture}
@@ -141,7 +141,7 @@ const AccountPage = () => {
         </aside>
 
         {/* Main Content */}
-        <main className="w-3/4 p-8">
+        <main className="personalDiv w-3/4 p-8">
             {isEditing ? (
                 <div>
                 <h1 className="text-2xl font-bold mb-6">Edit Personal Info</h1>
