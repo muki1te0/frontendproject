@@ -14,7 +14,16 @@ import SignLog from "./components/SignLog";
 import AccountPage from "./pages/AccountPage";
 import { loadUserFromStorage } from "./redux/slices/userSlice";
 import Footer from "./components/Footer";
-import PrivacyPolicy from "./components/PrivacyPolicy";
+import PrivacyPolicy from "./components/PrivacyPolicy"; 
+import SizeChartPage from "./pages/SizePage"; 
+import TermsPage from './pages/Terms'; 
+import AboutCarry from './pages/Company';
+
+
+
+
+
+
 
 const App = () => {
   return (
@@ -34,6 +43,11 @@ const App = () => {
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/product/:id" element={<ProductDetails />} />
             <Route path="/admin" element={<AdminPage />} />
+            <Route path="/size-guide" element={<SizeChartPage />} />
+            <Route path="/terms" element={<TermsPage />} />
+            <Route path="/company" element={<AboutCarry />} />
+
+
           </Routes>
         </div>
         <Footer /> {/* Добавляем футер */}
