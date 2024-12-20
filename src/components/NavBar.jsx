@@ -9,6 +9,7 @@ const NavBar = ({ onSearch, onFilter }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [category, setCategory] = useState("all");
   const [priceRange, setPriceRange] = useState([0, 1000]);
+  const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
   const filterDropdownRef = useRef(null);
 
   const { userInfo, isAuthenticated } = useSelector((state) => state.user);
@@ -49,15 +50,23 @@ const NavBar = ({ onSearch, onFilter }) => {
     setIsDropdownOpen((prevState) => !prevState);
   };
 
+  const toggleBurgerMenu = () => {
+    setIsBurgerMenuOpen((prevState) => !prevState);
+  };
+
   return (
     <header className="p-4 bg-gray-800 text-white flex justify-between items-center relative">
       {/* Logo */}
-      <Link to="/" className="text-2xl font-bold pr-8">
+      <Link to="/" className="logo text-2xl font-bold pr-8">
         Carry
       </Link>
 
-      {/* Categories */}
-      <nav className="flex gap-6">
+      {/* Categories for large screens */}
+      <nav
+        className={`nav flex gap-6 ${
+          isBurgerMenuOpen ? "block" : "hidden lg:flex"
+        }`}
+      >
         <Link to="/men" className="hover:text-gray-400">
           Men
         </Link>
@@ -76,7 +85,7 @@ const NavBar = ({ onSearch, onFilter }) => {
 
       {/* Search Box */}
       {onSearch && (
-        <div className="flex-grow mx-4">
+        <div className="searchBox flex-grow mx-4">
           <input
             type="text"
             placeholder="Search..."
@@ -86,76 +95,84 @@ const NavBar = ({ onSearch, onFilter }) => {
           />
         </div>
       )}
-
       {/* Filters */}
-      {onFilter && (
-        <div ref={filterDropdownRef} className="relative">
-          <button
-            onClick={() => setIsFilterDropdownOpen(!isFilterDropdownOpen)}
-            className="bg-gray-700 text-white px-4 py-2 rounded-lg mr-8"
-          >
-            Filters
-          </button>
-          {isFilterDropdownOpen && (
-            <div className="absolute top-full mt-2 bg-white text-black rounded shadow-md p-4 w-64 z-50">
-              <div className="mb-4">
-                <label className="block font-bold mb-2">Category</label>
-                <select
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                  className="w-full p-2 border rounded-lg"
-                >
-                  <option value="all">All</option>
-                  <option value="men's clothing">Men's Clothing</option>
-                  <option value="women's clothing">Women's Clothing</option>
-                  <option value="jewelery">Jewelry</option>
-                </select>
-              </div>
-              <div className="mb-4">
-                <label className="block font-bold mb-2">Price Range</label>
-                <div className="flex gap-2">
-                  <input
-                    type="number"
-                    value={priceRange[0]}
-                    onChange={(e) =>
-                      setPriceRange([parseInt(e.target.value) || 0, priceRange[1]])
-                    }
-                    placeholder="Min"
-                    className="w-1/2 p-2 border rounded-lg"
-                  />
-                  <input
-                    type="number"
-                    value={priceRange[1]}
-                    onChange={(e) =>
-                      setPriceRange([priceRange[0], parseInt(e.target.value) || 0])
-                    }
-                    placeholder="Max"
-                    className="w-1/2 p-2 border rounded-lg"
-                  />
+      <div className="">
+        {onFilter && (
+          <div ref={filterDropdownRef} className="filterDiv relative">
+            <button
+              onClick={() => setIsFilterDropdownOpen(!isFilterDropdownOpen)}
+              className="bg-gray-700 text-white px-4 py-2 rounded-lg mr-8"
+            >
+              Filters
+            </button>
+            {isFilterDropdownOpen && (
+              <div className="">
+                <div className="filterDropDown absolute top-full mt-2 bg-white text-black rounded shadow-md p-4 w-64 z-50">
+                  <div className="mb-4">
+                    <label className="block font-bold mb-2">Category</label>
+                    <select
+                      value={category}
+                      onChange={(e) => setCategory(e.target.value)}
+                      className="w-full p-2 border rounded-lg"
+                    >
+                      <option value="all">All</option>
+                      <option value="men's clothing">Men's Clothing</option>
+                      <option value="women's clothing">Women's Clothing</option>
+                      <option value="jewelery">Jewelry</option>
+                    </select>
+                  </div>
+                  <div className="mb-4">
+                    <label className="block font-bold mb-2">Price Range</label>
+                    <div className="flex gap-2">
+                      <input
+                        type="number"
+                        value={priceRange[0]}
+                        onChange={(e) =>
+                          setPriceRange([
+                            parseInt(e.target.value) || 0,
+                            priceRange[1],
+                          ])
+                        }
+                        placeholder="Min"
+                        className="w-1/2 p-2 border rounded-lg"
+                      />
+                      <input
+                        type="number"
+                        value={priceRange[1]}
+                        onChange={(e) =>
+                          setPriceRange([
+                            priceRange[0],
+                            parseInt(e.target.value) || 0,
+                          ])
+                        }
+                        placeholder="Max"
+                        className="w-1/2 p-2 border rounded-lg"
+                      />
+                    </div>
+                  </div>
+                  <button
+                    onClick={handleFilterApply}
+                    className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg mb-2"
+                  >
+                    Apply Filters
+                  </button>
+                  <button
+                    onClick={() => {
+                      setCategory("all");
+                      setPriceRange([0, 1000]);
+                    }}
+                    className="w-full bg-gray-300 text-black px-4 py-2 rounded-lg"
+                  >
+                    Reset Filters
+                  </button>
                 </div>
               </div>
-              <button
-                onClick={handleFilterApply}
-                className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg mb-2"
-              >
-                Apply Filters
-              </button>
-              <button
-                onClick={() => {
-                  setCategory("all");
-                  setPriceRange([0, 1000]);
-                }}
-                className="w-full bg-gray-300 text-black px-4 py-2 rounded-lg"
-              >
-                Reset Filters
-              </button>
-            </div>
-          )}
-        </div>
-      )}
-
+            )}
+          </div>
+        )}
+      </div>
       {/* Authentication */}
-      <div className="flex items-center gap-4">
+      <div className="authDiv flex items-center gap-4">
         {!isAuthenticated ? (
           <>
             <button
@@ -229,6 +246,58 @@ const NavBar = ({ onSearch, onFilter }) => {
               </div>
             )}
           </div>
+        )}
+      </div>
+
+      {/* Burger Icon */}
+      <div className="burger lg:hidden">
+        <button
+          onClick={toggleBurgerMenu}
+          className="flex flex-col gap-1 focus:outline-none"
+        >
+          <span className="block w-6 h-0.5 bg-white"></span>
+          <span className="block w-6 h-0.5 bg-white"></span>
+          <span className="block w-6 h-0.5 bg-white"></span>
+        </button>
+        {isBurgerMenuOpen && (
+          <nav className="absolute items-center top-full left-0 w-full bg-gray-800 text-white p-4 flex flex-col gap-4 z-50">
+            <div className="flex justify-around gap-14">
+            <Link to="/auth" className="hover:text-gray-400">
+              Log in
+            </Link>
+            <Link to="/account" className="hover:text-gray-400">
+              Profile
+            </Link>
+            <Link to="/auth" className="hover:text-gray-400">
+              Sign In
+            </Link>
+            </div>
+            <div class="bg-gray-300 h-0.5  z-50 w-full"></div>
+            <p className="text-2xl font-bold">Your box</p>
+            <div className="flex justify-around gap-40">
+            <Link to="/wishlist" className="hover:text-gray-400">
+              WishList
+            </Link>
+            <Link to="/cart" className="hover:text-gray-400">
+              Cart
+            </Link>
+            </div>
+            <div class="bg-gray-300 h-0.5  z-50 w-full"></div>
+            <p className="text-2xl font-bold">Filter</p>
+
+            <div className="flex gap-10">
+            <Link to="/men" className="hover:text-gray-400">
+              Men
+            </Link>
+            <Link to="/women" className="hover:text-gray-400">
+              Women
+            </Link>
+            <Link to="/jewelry" className="hover:text-gray-400">
+              Jewelry
+            </Link>
+            </div>
+
+          </nav>
         )}
       </div>
     </header>

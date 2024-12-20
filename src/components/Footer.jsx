@@ -106,7 +106,7 @@ const Footer = () => {
       </div>
 
       {/* Final Footer Bar */}
-      <div className="bg-gray-900 flex pb-3 justify-between items-center px-4">
+      <div className="finalFooterBar bg-gray-900 flex pb-3 justify-between items-center px-4">
         <div>Carry</div>
         <div className="flex space-x-4">
           <a href="#" className="hover:text-white">
