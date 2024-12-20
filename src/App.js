@@ -12,7 +12,7 @@ import SignLog from "./components/SignLog";
 import AccountPage from "./pages/AccountPage";
 import { loadUserFromStorage } from "./redux/slices/userSlice";
 import Footer from "./components/Footer";
-
+import PrivacyPolicy from "./components/PrivacyPolicy";
 const App = () => {
   const dispatch = useDispatch();
 
@@ -34,6 +34,7 @@ const App = () => {
             <Route path="/cart" element={<CartPage />} />
             <Route path="/auth" element={<SignLog />} />
             <Route path="/account" element={<AccountPage />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           </Routes>
         </div>
         <Footer />
