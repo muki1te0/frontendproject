@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <footer className="bg-gray-800 text-gray-400 pt-6 ">
@@ -53,9 +53,12 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white">
+                <Link
+                  to="/privacy-policy"
+                  className="text-blue-500 hover:underline"
+                >
                   Contact Us
-                </a>
+                </Link>
               </li>
               <li>
                 <a href="#" className="hover:text-white">
@@ -109,32 +112,32 @@ const Footer = () => {
             <a href="#" className="hover:text-white">
               Terms
             </a>
-            <a href="#" className="hover:text-white">
+            <Link
+              to="/privacy-policy"
+              className="text-blue-500 hover:underline"
+            >
               Privacy
-            </a>
-            <a href="#" className="hover:text-white">
-              Your Privacy Choices
-            </a>
+            </Link>
           </div>
         </div>
       </div>
       <div>
         <div className="bg-gray-900 pt-5 pb-6 mt-6 flex space-x-6 items-center justify-center ">
-          <a href="#">
+          <a href="https://t.me/most_fabulous">
             <img
-              src="https://img.icons8.com/color/48/000000/facebook.png"
-              alt="Facebook"
+              src="https://img.icons8.com/?size=100&id=MIMjVKoXINIT&format=png&color=000000"
+              alt="Face"
               className="w-7 grayscale hover:grayscale-0 transition duration-300"
             />
           </a>
-          <a href="#">
+          <a href="https://github.com/muki1te0">
             <img
-              src="https://img.icons8.com/color/48/000000/twitter.png"
-              alt="Twitter"
+              src="https://img.icons8.com/color/48/000000/github.png"
+              alt="GitHub"
               className="w-7 grayscale hover:grayscale-0 transition duration-300"
             />
           </a>
-          <a href="#">
+          <a href="https://www.instagram.com/nnnn__nn228/">
             <img
               src="https://img.icons8.com/color/48/000000/instagram-new.png"
               alt="Instagram"
@@ -150,10 +153,15 @@ const Footer = () => {
             Terms
           </a>
           <a href="#" className="hover:text-white">
-            Privacy
-          </a>
-          <a href="#" className="hover:text-white">
-            Your Privacy Choices
+            <p>
+              By signing up, you agree to our{" "}
+              <Link
+                to="/privacy-policy"
+                className="text-blue-500 hover:underline"
+              >
+                privacy
+              </Link>
+            </p>
           </a>
         </div>
       </div>
