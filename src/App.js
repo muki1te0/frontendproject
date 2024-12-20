@@ -19,20 +19,21 @@ import PrivacyPolicy from "./components/PrivacyPolicy";
 const App = () => {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/men" element={<MenPage />} />
-        <Route path="/women" element={<WomenPage />} />
-        <Route path="/jewelry" element={<JewelryPage />} />
-        <Route path="/wishlist" element={<WishlistPage />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/auth" element={<SignLog />} />
-        <Route path="/account" element={<AccountPage />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="/" element={<HomePage />} />
-        <Route path="/product/:id" element={<ProductDetails />} />
-        <Route path="/admin" element={<AdminPage />} />
-      </Routes>
+      <div className="flex flex-col min-h-screen">
+        <div className="flex-grow">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/men" element={<MenPage />} />
+            <Route path="/women" element={<WomenPage />} />
+            <Route path="/jewelry" element={<JewelryPage />} />
+            <Route path="/product/:id" element={<ProductDetails />} />
+            <Route path="/wishlist" element={<WishlistPage />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/auth" element={<SignLog />} />
+          </Routes>
+        </div>
+        <Footer /> {/* Добавляем футер */}
+      </div>
     </Router>
   );
 };
