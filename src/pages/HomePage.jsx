@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const HomePage = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [filters, setFilters] = useState({
     category: "all",
     priceRange: [0, 1000],
@@ -29,7 +30,7 @@ const HomePage = () => {
 
   const handleFilter = (newFilters) => {
     setFilters(newFilters);
-    applyFilters("", newFilters);
+    applyFilters(searchQuery, newFilters); // Ensure searchQuery is used along with filters
   };
 
   const applyFilters = (query, currentFilters) => {
