@@ -1,49 +1,31 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-gray-400 pt-6 ">
+    <footer className="bg-gray-800 text-gray-400 py-6">
       <div className="container mx-auto px-4">
         <h2 className="text-white text-4xl mb-6 font-bold">
           Carry. Access the Now.
         </h2>
 
-        <div className="flex justify-around">
+        {/* Main Footer Section */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* About Section */}
           <div>
             <h3 className="text-white text-lg mb-2">About</h3>
             <ul>
-              <li>
-                <a href="#" className="hover:text-white">
-                  How It Works
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white">
-                  Verification
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white">
-                  Newsroom
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white">
-                  Company
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white">
-                  Careers
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white">
-                  Carry Reviews
-                </a>
-              </li>
+              {["How It Works", "Verification", "Newsroom", "Company", "Careers", "Carry Reviews"].map((item, idx) => (
+                <li key={idx}>
+                  <a href="#" className="hover:text-white">
+                    {item}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
+
+          {/* Help Section */}
           <div>
             <h3 className="text-white text-lg mb-2">Help</h3>
             <ul>
@@ -72,38 +54,23 @@ const Footer = () => {
               </li>
             </ul>
           </div>
+
+          {/* Sell Section */}
           <div>
             <h3 className="text-white text-lg mb-2">Sell</h3>
             <ul>
-              <li>
-                <a href="#" className="hover:text-white">
-                  Selling Guide
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white">
-                  Professional Tools
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white">
-                  Carry Pro
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white">
-                  Sponsored Asks
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white">
-                  Developers
-                </a>
-              </li>
+              {["Selling Guide", "Professional Tools", "Carry Pro", "Sponsored Asks", "Developers"].map((item, idx) => (
+                <li key={idx}>
+                  <a href="#" className="hover:text-white">
+                    {item}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
+        {/* Footer Bottom Section */}
         <div className="mt-8 flex flex-wrap justify-between items-center text-sm">
           <div>
             <span>Region: English | $ USD</span>
@@ -121,33 +88,27 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div>
-        <div className="bg-gray-900 pt-5 pb-6 mt-6 flex space-x-6 items-center justify-center ">
-          <a href="https://t.me/most_fabulous">
+
+      {/* Social Links Section */}
+      <div className="bg-gray-900 pt-5 pb-6 mt-6 flex space-x-6 items-center justify-center">
+        {[
+          { href: "https://t.me/most_fabulous", icon: "https://img.icons8.com/?size=100&id=MIMjVKoXINIT&format=png&color=000000" },
+          { href: "https://github.com/muki1te0", icon: "https://img.icons8.com/color/48/000000/github.png" },
+          { href: "https://www.instagram.com/nnnn__nn228/", icon: "https://img.icons8.com/color/48/000000/instagram-new.png" }
+        ].map((link, idx) => (
+          <a key={idx} href={link.href}>
             <img
-              src="https://img.icons8.com/?size=100&id=MIMjVKoXINIT&format=png&color=000000"
-              alt="Face"
+              src={link.icon}
+              alt=""
               className="w-7 grayscale hover:grayscale-0 transition duration-300"
             />
           </a>
-          <a href="https://github.com/muki1te0">
-            <img
-              src="https://img.icons8.com/color/48/000000/github.png"
-              alt="GitHub"
-              className="w-7 grayscale hover:grayscale-0 transition duration-300"
-            />
-          </a>
-          <a href="https://www.instagram.com/nnnn__nn228/">
-            <img
-              src="https://img.icons8.com/color/48/000000/instagram-new.png"
-              alt="Instagram"
-              className="w-7 grayscale hover:grayscale-0 transition duration-300"
-            />
-          </a>
-        </div>
+        ))}
       </div>
-      <div className="bg-gray-900 flex pb-3 justify-around items-center">
-        <div className="">Carry</div>
+
+      {/* Final Footer Bar */}
+      <div className="bg-gray-900 flex pb-3 justify-between items-center px-4">
+        <div>Carry</div>
         <div className="flex space-x-4">
           <a href="#" className="hover:text-white">
             Terms

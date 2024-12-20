@@ -176,7 +176,21 @@ const NavBar = ({ onSearch, onFilter }) => {
             </button>
           </>
         ) : (
-          <div className="relative">
+          <div className="relative flex items-center gap-4">
+            <Link
+              to="/wishlist"
+              className="hover:text-gray-400 flex items-center"
+              aria-label="Wishlist"
+            >
+              Wishlist
+            </Link>
+            <Link
+              to="/cart"
+              className="hover:text-gray-400 flex items-center"
+              aria-label="Cart"
+            >
+              Cart
+            </Link>
             <div
               className="flex items-center gap-2 cursor-pointer"
               onClick={toggleUserDropdown}
