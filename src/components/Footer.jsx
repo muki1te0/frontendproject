@@ -25,7 +25,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Help Section */}
           <div>
             <h3 className="text-white text-lg mb-2">Help</h3>
             <ul>

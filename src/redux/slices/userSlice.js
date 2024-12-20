@@ -16,6 +16,7 @@ const initialState = {
   isAuthenticated: false,
 };
 
+
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -54,17 +55,14 @@ const userSlice = createSlice({
       }
     },
     addToCart(state, action) {
-      state.userInfo.cart = state.userInfo.cart || [];
       if (!state.userInfo.cart.some((item) => item.id === action.payload.id)) {
         state.userInfo.cart.push(action.payload);
-        localStorage.setItem("user", JSON.stringify(state.userInfo));
       }
     },
     removeFromCart(state, action) {
       state.userInfo.cart = state.userInfo.cart.filter(
         (item) => item.id !== action.payload
       );
-      localStorage.setItem("user", JSON.stringify(state.userInfo));
     },
     addToWishlist(state, action) {
       const newItem = action.payload;
