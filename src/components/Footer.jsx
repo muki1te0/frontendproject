@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-gray-400 py-6">
+    <footer className="bg-gray-800 text-gray-400 pt-6">
       <div className="container mx-auto px-4">
         <h2 className="text-white text-4xl mb-6 font-bold">
           Carry. Access the Now.
