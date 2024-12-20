@@ -6,7 +6,8 @@ import "../SignLog.css";
 import NavBar from "./NavBar";
 
 const SignLog = () => {
-  const [isSignUp, setIsSignUp] = useState(true);
+  const [isSignUp, setIsSignUp] = useState(true); // Toggle for Sign Up and Log In
+  const [isAdmin, setIsAdmin] = useState(false); // Admin checkbox state
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -14,7 +15,6 @@ const SignLog = () => {
     confirmPassword: "",
   });
   const [errors, setErrors] = useState({});
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -28,7 +28,7 @@ const SignLog = () => {
     }
     if (!/^(?=.*[A-Z])(?=.*\d).{8,}$/.test(formData.password)) {
       newErrors.password =
-        "Password must be at least 8 characters long, include one uppercase letter and one number.";
+        "Password must be at least 8 characters long, include one uppercase letter, and one number.";
     }
     if (isSignUp && formData.password !== formData.confirmPassword) {
       newErrors.confirmPassword = "Passwords do not match.";
@@ -44,47 +44,30 @@ const SignLog = () => {
     setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
   };
 
-  const handleSignup = () => {
-    const { username, email, password } = formData;
-
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-    users.push({ username, email, password });
-    localStorage.setItem("users", JSON.stringify(users));
-
-    dispatch(login({ username, email }));
-    navigate("/");
-  };
-
-  const handleLogin = () => {
-    const { username, password } = formData;
-
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-    const user = users.find(
-      (user) => user.username === username && user.password === password
-    );
-
-    if (user) {
-      dispatch(login({ username: user.username, email: user.email }));
-      navigate("/");
-    } else {
-      alert("Invalid username or password");
-    }
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
+      const user = { ...formData, isAdmin };
       if (isSignUp) {
-        handleSignup();
+        const users = JSON.parse(localStorage.getItem("users")) || [];
+        users.push(user);
+        localStorage.setItem("users", JSON.stringify(users));
       } else {
-        handleLogin();
+        const users = JSON.parse(localStorage.getItem("users")) || [];
+        const matchedUser = users.find(
+          (u) =>
+            u.username === formData.username &&
+            u.password === formData.password
+        );
+        if (!matchedUser) {
+          alert("Invalid credentials!");
+          return;
+        }
+        user.isAdmin = matchedUser.isAdmin; // Set admin flag from stored data
       }
-      setFormData({
-        username: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-      });
+
+      dispatch(login(user));
+      navigate(user.isAdmin ? "/admin" : "/");
     }
   };
 
@@ -178,6 +161,16 @@ const SignLog = () => {
               </div>
             )}
 
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                checked={isAdmin}
+                onChange={() => setIsAdmin(!isAdmin)}
+                className="mr-2"
+              />
+              <label className="text-gray-700">Are you an Admin?</label>
+            </div>
+
             <button
               type="submit"
               className="w-full bg-black text-white py-2 rounded"
@@ -185,29 +178,6 @@ const SignLog = () => {
               {isSignUp ? "Sign Up" : "Log In"}
             </button>
           </form>
-          <div className="text-center mt-4">
-            {isSignUp ? (
-              <span>
-                Already have an account?{" "}
-                <button
-                  className="text-blue-500 hover:underline"
-                  onClick={() => setIsSignUp(false)}
-                >
-                  Log In
-                </button>
-              </span>
-            ) : (
-              <span>
-                Need an account?{" "}
-                <button
-                  className="text-blue-500 hover:underline"
-                  onClick={() => setIsSignUp(true)}
-                >
-                  Sign Up
-                </button>
-              </span>
-            )}
-          </div>
         </div>
       </div>
     </div>

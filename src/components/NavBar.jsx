@@ -6,7 +6,7 @@ import { logout } from "../redux/slices/userSlice";
 const NavBar = ({ onSearch, onFilter }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Added state for user dropdown
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [category, setCategory] = useState("all");
   const [priceRange, setPriceRange] = useState([0, 1000]);
   const filterDropdownRef = useRef(null);
@@ -30,7 +30,6 @@ const NavBar = ({ onSearch, onFilter }) => {
     navigate("/");
   };
 
-  // Close filter dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -46,7 +45,6 @@ const NavBar = ({ onSearch, onFilter }) => {
     };
   }, []);
 
-  // Toggle user dropdown menu
   const toggleUserDropdown = () => {
     setIsDropdownOpen((prevState) => !prevState);
   };
@@ -69,6 +67,11 @@ const NavBar = ({ onSearch, onFilter }) => {
         <Link to="/jewelry" className="hover:text-gray-400">
           Jewelry
         </Link>
+        {isAuthenticated && userInfo.isAdmin && (
+          <Link to="/admin" className="hover:text-gray-400">
+            Admin Dashboard
+          </Link>
+        )}
       </nav>
 
       {/* Search Box */}
@@ -94,14 +97,7 @@ const NavBar = ({ onSearch, onFilter }) => {
             Filters
           </button>
           {isFilterDropdownOpen && (
-            <div className="absolute top-full mt-2 bg-white text-black rounded shadow-md p-4 w-64 z-50" 
-            style={{
-              right: 0,
-              maxWidth: '90vw', 
-              overflowX: 'hidden', 
-              boxSizing: 'border-box',
-            }}
-            >
+            <div className="absolute top-full mt-2 bg-white text-black rounded shadow-md p-4 w-64 z-50">
               <div className="mb-4">
                 <label className="block font-bold mb-2">Category</label>
                 <select
@@ -140,7 +136,7 @@ const NavBar = ({ onSearch, onFilter }) => {
               </div>
               <button
                 onClick={handleFilterApply}
-                className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg mb-5"
+                className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg mb-2"
               >
                 Apply Filters
               </button>
@@ -216,6 +212,14 @@ const NavBar = ({ onSearch, onFilter }) => {
                 >
                   Orders
                 </button>
+                {userInfo.isAdmin && (
+                  <button
+                    onClick={() => navigate("/admin")}
+                    className="block px-4 py-2 hover:bg-gray-200"
+                  >
+                    Admin Dashboard
+                  </button>
+                )}
                 <button
                   onClick={handleLogout}
                   className="block px-4 py-2 hover:bg-gray-200"

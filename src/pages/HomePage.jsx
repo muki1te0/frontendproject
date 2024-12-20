@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const HomePage = () => {
-  const [products, setProducts] = useState([]);
+  const reduxProducts = useSelector((state) => state.products.products); // Products from Redux
+  const [apiProducts, setApiProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filters, setFilters] = useState({
@@ -11,6 +13,7 @@ const HomePage = () => {
     priceRange: [0, 1000],
   });
 
+  // Fetch initial products from API
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
       .then((res) => res.json())
@@ -18,25 +21,31 @@ const HomePage = () => {
         const filteredData = data.filter(
           (product) => product.category !== "electronics"
         );
-        setProducts(filteredData);
-        setFilteredProducts(filteredData);
+        setApiProducts(filteredData);
       })
       .catch((err) => console.error("Error fetching products:", err));
   }, []);
 
+  // Combine Redux and API products
+  useEffect(() => {
+    const allProducts = [...reduxProducts, ...apiProducts];
+    applyFilters(searchQuery, filters, allProducts);
+  }, [reduxProducts, apiProducts, searchQuery, filters]);
+
   const handleSearch = (query) => {
+    setSearchQuery(query);
     applyFilters(query, filters);
   };
 
   const handleFilter = (newFilters) => {
     setFilters(newFilters);
-    applyFilters(searchQuery, newFilters); // Ensure searchQuery is used along with filters
+    applyFilters(searchQuery, newFilters);
   };
 
-  const applyFilters = (query, currentFilters) => {
+  const applyFilters = (query, currentFilters, productsList = [...reduxProducts, ...apiProducts]) => {
     const lowerCaseQuery = query.toLowerCase();
 
-    const filtered = products.filter((product) => {
+    const filtered = productsList.filter((product) => {
       const matchesQuery =
         product.title.toLowerCase().includes(lowerCaseQuery) ||
         product.description.toLowerCase().includes(lowerCaseQuery);
