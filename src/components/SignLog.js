@@ -13,29 +13,44 @@ const SignLog = () => {
     password: "",
     confirmPassword: "",
   });
+  const [errors, setErrors] = useState({});
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const validate = () => {
+    const newErrors = {};
+    if (formData.username.trim().length < 4) {
+      newErrors.username = "Username must be at least 4 characters long.";
+    }
+    if (isSignUp && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = "Invalid email address.";
+    }
+    if (!/^(?=.*[A-Z])(?=.*\d).{8,}$/.test(formData.password)) {
+      newErrors.password =
+        "Password must be at least 8 characters long, include one uppercase letter and one number.";
+    }
+    if (isSignUp && formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = "Passwords do not match.";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
   };
 
   const handleSignup = () => {
-    const { username, email, password, confirmPassword } = formData;
+    const { username, email, password } = formData;
 
-    if (password !== confirmPassword) {
-      alert("Passwords do not match!");
-      return;
-    }
-
-    // Save user to localStorage (temporary)
     const users = JSON.parse(localStorage.getItem("users")) || [];
     users.push({ username, email, password });
     localStorage.setItem("users", JSON.stringify(users));
 
-    // Log the user in
     dispatch(login({ username, email }));
     navigate("/");
   };
@@ -44,7 +59,9 @@ const SignLog = () => {
     const { username, password } = formData;
 
     const users = JSON.parse(localStorage.getItem("users")) || [];
-    const user = users.find((user) => user.username === username && user.password === password);
+    const user = users.find(
+      (user) => user.username === username && user.password === password
+    );
 
     if (user) {
       dispatch(login({ username: user.username, email: user.email }));
@@ -56,12 +73,19 @@ const SignLog = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (isSignUp) {
-      handleSignup();
-    } else {
-      handleLogin();
+    if (validate()) {
+      if (isSignUp) {
+        handleSignup();
+      } else {
+        handleLogin();
+      }
+      setFormData({
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
     }
-    setFormData({ username: "", email: "", password: "", confirmPassword: "" });
   };
 
   return (
@@ -88,46 +112,72 @@ const SignLog = () => {
             </button>
           </div>
           <form onSubmit={handleSubmit} className="space-y-4">
-            <input
-              type="text"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              placeholder="Username"
-              className="w-full p-2 border rounded"
-              required
-            />
-            {isSignUp && (
+            <div>
               <input
-                type="email"
-                name="email"
-                value={formData.email}
+                type="text"
+                name="username"
+                value={formData.username}
                 onChange={handleChange}
-                placeholder="Email Address"
+                placeholder="Username"
                 className="w-full p-2 border rounded"
                 required
               />
-            )}
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="Password"
-              className="w-full p-2 border rounded"
-              required
-            />
+              {errors.username && (
+                <p className="text-red-500 text-sm">{errors.username}</p>
+              )}
+            </div>
+
             {isSignUp && (
+              <div>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="Email Address"
+                  className="w-full p-2 border rounded"
+                  required
+                />
+                {errors.email && (
+                  <p className="text-red-500 text-sm">{errors.email}</p>
+                )}
+              </div>
+            )}
+
+            <div>
               <input
                 type="password"
-                name="confirmPassword"
-                value={formData.confirmPassword}
+                name="password"
+                value={formData.password}
                 onChange={handleChange}
-                placeholder="Confirm Password"
+                placeholder="Password"
                 className="w-full p-2 border rounded"
                 required
               />
+              {errors.password && (
+                <p className="text-red-500 text-sm">{errors.password}</p>
+              )}
+            </div>
+
+            {isSignUp && (
+              <div>
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  placeholder="Confirm Password"
+                  className="w-full p-2 border rounded"
+                  required
+                />
+                {errors.confirmPassword && (
+                  <p className="text-red-500 text-sm">
+                    {errors.confirmPassword}
+                  </p>
+                )}
+              </div>
             )}
+
             <button
               type="submit"
               className="w-full bg-black text-white py-2 rounded"
