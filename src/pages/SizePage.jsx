@@ -1,13 +1,13 @@
 import React from "react";
-import NavBar from "../components/NavBar"; // Adjust the path if necessary
+import NavBar from "../components/NavBar";
 
 const SizeChartPage = () => {
   return (
     <div className="bg-gradient-to-b from-blue-50 to-white min-h-screen">
-      {/* Include the existing NavBar */}
+      { }
       <NavBar />
 
-      {/* Content Section */}
+      { }
       <div className="flex flex-col items-start py-12 px-6 max-w-5xl mx-auto">
         <h1 className="text-4xl font-bold text-gray-800 mb-4">Size Recommendation</h1>
         <p className="text-gray-700 text-left mb-8 text-lg leading-relaxed">

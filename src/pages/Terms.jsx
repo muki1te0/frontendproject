@@ -1,13 +1,13 @@
 import React from "react";
-import NavBar from "../components/NavBar"; // Adjust the path if needed
+import NavBar from "../components/NavBar";
 
 const TermsPage = () => {
   return (
     <div className="bg-gray-100 min-h-screen flex flex-col">
-      {/* Include NavBar */}
+      { }
       <NavBar />
 
-      {/* Content Section */}
+      { }
       <div className="flex-grow py-12 px-6">
         <div className="max-w-7xl mx-auto bg-white p-8 rounded-lg shadow-lg">
           <h1 className="text-4xl font-bold mb-6 text-gray-800">Terms and Conditions</h1>

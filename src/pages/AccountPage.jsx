@@ -94,7 +94,7 @@ const AccountPage = () => {
     <div className="bg-gray-100 min-h-screen">
       <NavBar onSearch={null}/>
       <div className="accoutDiv flex">
-        {/* Sidebar */}
+        { }
         <aside className="w-1/4 sideBarDiv bg-lime-100 rounded-3xl ml-4 mt-10 p-6 overflow-hidden">
           <div className="text-center">
             <img
@@ -140,7 +140,7 @@ const AccountPage = () => {
           </ul>
         </aside>
 
-        {/* Main Content */}
+        { }
         <main className="personalDiv w-3/4 p-8">
             {isEditing ? (
                 <div>

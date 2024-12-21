@@ -6,8 +6,8 @@ import "../SignLog.css";
 import NavBar from "./NavBar";
 
 const SignLog = () => {
-  const [isSignUp, setIsSignUp] = useState(true); // Toggle for Sign Up and Log In
-  const [isAdmin, setIsAdmin] = useState(false); // Admin checkbox state
+  const [isSignUp, setIsSignUp] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -63,7 +63,7 @@ const SignLog = () => {
           alert("Invalid credentials!");
           return;
         }
-        user.isAdmin = matchedUser.isAdmin; // Set admin flag from stored data
+        user.isAdmin = matchedUser.isAdmin;
       }
 
       dispatch(login(user));

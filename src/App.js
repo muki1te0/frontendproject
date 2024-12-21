@@ -19,12 +19,6 @@ import SizeChartPage from "./pages/SizePage";
 import TermsPage from './pages/Terms'; 
 import AboutCarry from './pages/Company';
 
-
-
-
-
-
-
 const App = () => {
   return (
     <Router>
@@ -50,7 +44,7 @@ const App = () => {
 
           </Routes>
         </div>
-        <Footer /> {/* Добавляем футер */}
+        <Footer /> { }
       </div>
     </Router>
   );

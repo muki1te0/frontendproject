@@ -56,12 +56,12 @@ const NavBar = ({ onSearch, onFilter }) => {
 
   return (
     <header className="p-4 bg-gray-800 text-white flex justify-between items-center relative">
-      {/* Logo */}
+      { }
       <Link to="/" className="logo text-2xl font-bold pr-8">
         Carry
       </Link>
 
-      {/* Categories for large screens */}
+      { }
       <nav
         className={`nav flex gap-6 ${
           isBurgerMenuOpen ? "block" : "hidden lg:flex"
@@ -83,7 +83,7 @@ const NavBar = ({ onSearch, onFilter }) => {
         )}
       </nav>
 
-      {/* Search Box */}
+      { }
       {onSearch && (
         <div className="searchBox flex-grow mx-4">
           <input
@@ -95,7 +95,7 @@ const NavBar = ({ onSearch, onFilter }) => {
           />
         </div>
       )}
-      {/* Filters */}
+      { }
       <div className="">
         {onFilter && (
           <div ref={filterDropdownRef} className="filterDiv relative">
@@ -171,7 +171,7 @@ const NavBar = ({ onSearch, onFilter }) => {
           </div>
         )}
       </div>
-      {/* Authentication */}
+      { }
       <div className="authDiv flex items-center gap-4">
         {!isAuthenticated ? (
           <>
@@ -249,7 +249,7 @@ const NavBar = ({ onSearch, onFilter }) => {
         )}
       </div>
 
-      {/* Burger Icon */}
+      { }
       <div className="burger lg:hidden">
         <button
           onClick={toggleBurgerMenu}

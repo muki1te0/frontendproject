@@ -5,14 +5,14 @@ const Footer = () => {
   return (
     <footer className="bg-gray-800 text-gray-400 pt-6">
       <div className="container mx-auto px-4">
-        {/* Title Section */}
+        { }
         <h2 className="text-white text-4xl mb-6 font-bold">
           Carry. Access the Now.
         </h2>
 
-        {/* Main Footer Section */}
+        { }
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* About Section */}
+          { }
           <div>
             <h3 className="text-white text-lg mb-4">About</h3>
             <ul className="space-y-2">
@@ -26,7 +26,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Help Section */}
+          { }
           <div>
             <h3 className="text-white text-lg mb-4">Help</h3>
             <ul className="space-y-2">
@@ -43,7 +43,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Region and Terms Section */}
+          { }
           <div>
             <h3 className="text-white text-lg mb-4">Region</h3>
             <p className="mb-4">Region: English | $ USD</p>
@@ -58,7 +58,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Social Links Section */}
+        { }
         <div className="bg-gray-900 py-6 mt-8 flex space-x-6 items-center justify-center">
           {[
             {
@@ -89,7 +89,7 @@ const Footer = () => {
           ))}
         </div>
 
-        {/* Final Footer Bar */}
+        { }
         <div className="bg-gray-900 py-4 flex flex-col md:flex-row justify-between items-center px-4 text-sm">
           <div className="text-gray-500">© 2024 Carry. All Rights Reserved.</div>
           <div className="flex space-x-4 mt-2 md:mt-0">

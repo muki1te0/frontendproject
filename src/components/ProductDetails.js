@@ -10,7 +10,6 @@ import { addToCart } from "../redux/slices/cartSlice";
 import NavBar from "./NavBar";
 import AuthModal from "./AuthModal";
 
-// Mock review helpers
 const randomNames = [
   "John Doe",
   "Jane Smith",
@@ -28,7 +27,7 @@ const randomFeedback = [
 const generateMockReviews = (count) =>
   Array.from({ length: count }, () => ({
     name: randomNames[Math.floor(Math.random() * randomNames.length)],
-    rating: Math.floor(Math.random() * 5) + 1, // Random rating between 1 and 5
+    rating: Math.floor(Math.random() * 5) + 1,
     review: randomFeedback[Math.floor(Math.random() * randomFeedback.length)],
   }));
 
@@ -46,7 +45,6 @@ const ProductDetails = () => {
   const products = useSelector((state) => state.products.products);
 
   useEffect(() => {
-    // Fetch product details either from Redux or API
     const existingProduct = products.find(
       (item) => item.id === parseInt(id, 10)
     );
@@ -61,14 +59,12 @@ const ProductDetails = () => {
   }, [id, products]);
 
   useEffect(() => {
-    // Load or generate mock reviews
     const mockReviewsDB = JSON.parse(localStorage.getItem("reviewsDB")) || {};
     const productReviews = mockReviewsDB[id]?.reviews || generateMockReviews(5);
     mockReviewsDB[id] = { reviews: productReviews }; // Save reviews in localStorage
     localStorage.setItem("reviewsDB", JSON.stringify(mockReviewsDB));
     setReviews(productReviews);
 
-    // Calculate average rating
     const avgRating =
       productReviews.reduce((sum, r) => sum + r.rating, 0) /
       productReviews.length;

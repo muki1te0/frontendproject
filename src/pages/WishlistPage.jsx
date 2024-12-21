@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const WishlistPage = () => {
   const wishlist = useSelector((state) => state.user.userInfo.wishlist || []);
 
-  console.log("Wishlist items:", wishlist); // Debugging
+  console.log("Wishlist items:", wishlist);
 
   return (
     <>

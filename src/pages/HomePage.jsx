@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const HomePage = () => {
-  const reduxProducts = useSelector((state) => state.products.products); // Products from Redux
+  const reduxProducts = useSelector((state) => state.products.products);
   const [apiProducts, setApiProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -13,7 +13,6 @@ const HomePage = () => {
     priceRange: [0, 1000],
   });
 
-  // Fetch initial products from API
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
       .then((res) => res.json())
@@ -26,7 +25,6 @@ const HomePage = () => {
       .catch((err) => console.error("Error fetching products:", err));
   }, []);
 
-  // Combine Redux and API products
   useEffect(() => {
     const allProducts = [...reduxProducts, ...apiProducts];
     applyFilters(searchQuery, filters, allProducts);

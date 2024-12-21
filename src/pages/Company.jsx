@@ -1,13 +1,13 @@
 import React from "react";
-import NavBar from "../components/NavBar"; // Ensure this path is correct
+import NavBar from "../components/NavBar";
 
 const AboutCarry = () => {
   return (
     <div className="bg-gray-100 min-h-screen">
-      {/* Navbar */}
+      { }
       <NavBar />
 
-      {/* Hero Section */}
+      { }
       <section className="bg-black text-white py-16">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl font-bold mb-4">Every item is Carry Verified.</h1>
@@ -23,12 +23,12 @@ const AboutCarry = () => {
         </div>
       </section>
 
-      {/* Trust The Process Section */}
+      { }
       <section className="py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">Trust The Process</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Process Items */}
+            { }
             {[
               {
                 title: "Condition",
@@ -63,12 +63,12 @@ const AboutCarry = () => {
         </div>
       </section>
 
-      {/* Our Values Section */}
+      { }
       <section className="bg-gray-800 text-white py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">Our Values</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Value Items */}
+            { }
             {[
               {
                 title: "Experience & Data",
@@ -103,12 +103,12 @@ const AboutCarry = () => {
         </div>
       </section>
 
-      {/* Hear From Our Team Section */}
+      { }
       <section className="py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">Hear From Our Team</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Testimonials */}
+            { }
             {[
               {
                 text: "I take pride in ensuring each product exceeds customer expectations.",

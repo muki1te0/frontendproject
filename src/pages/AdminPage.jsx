@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addProduct, deleteProduct, updateProduct, getProducts } from '../redux/slices/productsSlice'; // Updated import
+import { addProduct, deleteProduct, updateProduct, getProducts } from '../redux/slices/productsSlice';
 import NavBar from '../components/NavBar';
 
 const AdminPage = () => {
@@ -16,8 +16,7 @@ const AdminPage = () => {
   }, [dispatch]);
 
   const handleCreate = () => {
-    // Assign a new ID and dispatch the action to add the product
-    const newId = Date.now(); // Use timestamp as a unique ID
+    const newId = Date.now();
     const productToAdd = { id: newId, ...newProduct };
     dispatch(addProduct(productToAdd));
     setNewProduct({ title: '', price: '', description: '', image: '' });
@@ -56,7 +55,7 @@ const AdminPage = () => {
       <div className="p-8">
         <h1 className="text-2xl font-bold mb-6">Admin Dashboard</h1>
 
-        {/* Product List */}
+        { }
         <div>
           <h2 className="text-xl font-semibold mb-4">Products</h2>
           <table className="w-full table-auto border-collapse border border-gray-200">
@@ -98,7 +97,7 @@ const AdminPage = () => {
           </table>
         </div>
 
-        {/* Review Moderation */}
+        { }
         {productIdForReviews && (
           <div className="mt-8">
             <h2 className="text-xl font-semibold mb-4">Reviews for Product {productIdForReviews}</h2>
@@ -121,7 +120,7 @@ const AdminPage = () => {
           </div>
         )}
 
-        {/* Create/Edit Product */}
+        { }
         <div className="mt-8">
           <h2 className="text-xl font-semibold mb-4">
             {selectedProduct ? 'Edit Product' : 'Create New Product'}
